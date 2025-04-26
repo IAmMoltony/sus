@@ -1,0 +1,11 @@
+pre {
+    background-color: lightgrey;
+}
+
+.sus-upload-ok {
+    color: green;
+}
+
+.sus-upload-error {
+    color: red;
+}
