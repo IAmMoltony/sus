@@ -6,7 +6,7 @@ function extract_zip($zip_file, $extract_path)
     }
 
     $zip = new ZipArchive;
-    if ($zip->open($target_file_name) == true) {
+    if ($zip->open($zip_file) == true) {
         $zip->extractTo($extract_path);
         $zip->close();
         return true;
