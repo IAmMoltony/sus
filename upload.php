@@ -4,12 +4,36 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     die("you should post this bruh");
 }
 
+if (empty($_POST) && $_SERVER["CONTENT_LENGTH"] > 0) {
+    die("your files are too thicc. try submitting something smaller");
+}
+
 require_once('config.php');
 require_once('uploadlog.php');
 require_once('extractor.php');
 
 $upload_log = new SusUploadLog();
 $config = new SusConfig();
+
+// === some error handling ===
+// prints warnings to log, dies upon errors
+
+set_error_handler(function($errno, $errstr, $errfile, $errline) {
+    global $upload_log;
+    $upload_log->message("UPLOADER WARNING: $errstr @ $errfile:$errline (errno=$errno)");
+    return true;
+});
+
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error && in_array($error["type"], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR])) {
+        $emsg = $error["message"];
+        $efil = $error["file"];
+        $elin = $error["line"];
+        $upload_log->message("UPLOADER *******E R R O R*******: $emsg @ $efil:$elin");
+        die("<span style=\"color:red\">The uploader has encountered a fatal error, please look in the log.</span><br><pre>{$upload_log->as_string()}</pre><br><span>we are cooked</span>");
+    }
+});
 
 function try_extracting_tar($target_file_name, $extract_path)
 {

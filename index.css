@@ -8,3 +8,11 @@
     transform: translate(-50%, -50%);
     text-align: center;
 }
+
+#sus-hr-footer {
+    width: 60%;
+}
+
+#sus-footer {
+    font-size: 60%;
+}

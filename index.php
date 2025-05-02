@@ -12,7 +12,7 @@
         <i>simple uploading server</i>
         <hr>
         <form enctype="multipart/form-data" action="upload.php" method="post">
-            <input type="file" name="susfile[]" required multiple><p></p>
+            <input type="file" name="susfile[]" required multiple><p>max upload size: <b><?php echo ini_get("upload_max_filesize"); ?></b> / max post size: <b><?php echo ini_get("post_max_size"); ?></b></p>
             <input type="text" name="susfolder" placeholder="folder (optional)"><p></p>
             <label for="susunzip">decompress and/or extract (<i>for zip, tar and gz files</i>)</label>
             <input type="checkbox" name="susunzip">
@@ -23,6 +23,8 @@
             <p><i>*options apply for all files!</i></p>
             <input type="submit" value="upload">
         </form>
+        <hr id="sus-hr-footer">
+        <div id="sus-footer">powered by php <?php echo phpversion(); ?> running on <span title="<?php echo php_uname(); ?>"><?php echo php_uname("s"); ?></span> named <?php echo gethostname(); ?></div>
     </div>
 </body>
 </html>
