@@ -3,23 +3,23 @@ class SusUploadLog
 {
     private $log;
 
-    function __construct()
+    public function __construct()
     {
         $this->log = [];
     }
 
-    function message(string $message)
+    public function message(string $message)
     {
         $this->log[] = "** " . $message;
         error_log("sus/uploadlog -> $message");
     }
 
-    function delimiter()
+    public function delimiter()
     {
         $this->log[] = "*****************";
     }
 
-    function as_string()
+    public function __toString()
     {
         $log_string = "";
         foreach ($this->log as $message) {

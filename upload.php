@@ -11,6 +11,7 @@ if (empty($_POST) && $_SERVER["CONTENT_LENGTH"] > 0) {
 require_once('config.php');
 require_once('uploadlog.php');
 require_once('extractor.php');
+require_once('exectime.php');
 
 $upload_log = new SusUploadLog();
 $config = new SusConfig();
@@ -32,7 +33,7 @@ register_shutdown_function(function() {
         $efil = $error["file"];
         $elin = $error["line"];
         $upload_log->message("UPLOADER *******E R R O R*******: $emsg @ $efil:$elin");
-        die("<span style=\"color:red\">The uploader has encountered a fatal error, please look in the log.</span><br><pre>{$upload_log->as_string()}</pre><br><span>we are cooked</span>");
+        die("<span style=\"color:red\">The uploader has encountered a fatal error, please look in the log.</span><br><pre>{$upload_log}</pre><br><span>we are cooked</span>");
     }
 });
 
@@ -68,6 +69,9 @@ function delete_unzipped($shall_delete_unzipped, $target_file_name)
 function process_file($file_index)
 {
     global $config, $upload_log; // balls
+
+    $exectime = new ExecutionTime;
+    $exectime->start();
 
     $hr_file_index = $file_index + 1;
 
@@ -224,6 +228,9 @@ function process_file($file_index)
         }
     }
 
+    $exectime->end();
+    $upload_log->message("Processing took $exectime.");
+
     return true;
 }
 
@@ -253,7 +260,7 @@ $upload_log->message("Processed $total_files files with $error_count errors ($pe
 <body>
     <p>sus has processed your upload:</p>
     <pre>
-<?php echo $upload_log->as_string(); ?>
+<?php echo $upload_log; ?>
     </pre>
     <?php
 if ($error_count) {
