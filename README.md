@@ -18,6 +18,8 @@ put sus there
 
 thats it
 
+for extracting you'll need to enable the zip extension
+
 ## the what
 
 you can upload stuff. it can also extract them for u automatically and put in a folder
