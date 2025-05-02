@@ -180,6 +180,7 @@ function process_file($file_index)
                     }
                 } else {
                     $upload_log->message("Unable to open zip file: " . $extract_zip_value);
+                    return false;
                 }
                 break;
             case "application/x-tar":
