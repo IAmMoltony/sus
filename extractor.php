@@ -2,7 +2,7 @@
 function extract_zip($zip_file, $extract_path)
 {
     if (!class_exists("ZipArchive")) {
-        return "zip extension is not installed on server";
+        return "zip extension is not installed on server or is disabled";
     }
 
     $zip = new ZipArchive;
