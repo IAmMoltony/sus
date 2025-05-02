@@ -11,6 +11,7 @@ class SusUploadLog
     function message(string $message)
     {
         $this->log[] = "** " . $message;
+        error_log("sus/uploadlog -> $message");
     }
 
     function delimiter()
