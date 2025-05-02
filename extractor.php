@@ -1,6 +1,10 @@
 <?php
 function extract_zip($zip_file, $extract_path)
 {
+    if (!class_exists("ZipArchive")) {
+        return "zip extension is not installed on server";
+    }
+
     $zip = new ZipArchive;
     if ($zip->open($target_file_name) == true) {
         $zip->extractTo($extract_path);
