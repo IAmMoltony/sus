@@ -55,7 +55,7 @@ function delete_unzipped($shall_delete_unzipped, $target_file_name)
     global $upload_log;
 
     if (!$shall_delete_unzipped) {
-        return false;
+        return true;
     }
     if (unlink(realpath($target_file_name))) {
         $upload_log->message("Compressed file deleted.");
