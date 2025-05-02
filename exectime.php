@@ -25,7 +25,7 @@ class ExecutionTime
     {
         $runtime = $this->get_runtime();
         $runtime_s = $runtime / 1000;
-        return "$runtime ms ($runtime_s s})";
+        return "$runtime ms ($runtime_s s)";
     }
 }
 ?>
