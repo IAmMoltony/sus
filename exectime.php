@@ -24,7 +24,8 @@ class ExecutionTime
     public function __toString()
     {
         $runtime = $this->get_runtime();
-        return "$runtime ms ({$runtime / 1000} s})";
+        $runtime_s = $runtime / 1000;
+        return "$runtime ms ($runtime_s s})";
     }
 }
 ?>
